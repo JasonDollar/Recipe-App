@@ -17,9 +17,9 @@ const client = new ApolloClient({
 const Root = (
   <Router>
     <Switch>
-      <Route to={Constants.PATHS.root} exact component={App} />
+      <Route to={Constants.PATHS.signUp} component={SignUp} />
       <Route to={Constants.PATHS.signIn} component={SignIn} />
-      <Route to={Constants.PATHS.signUp} component={SignIn} />
+      <Route to={Constants.PATHS.root} exact component={App} />
       <Redirect to={Constants.PATHS.root} />
     </Switch>
   </Router>
@@ -27,7 +27,7 @@ const Root = (
 
 ReactDOM.render((
   <ApolloProvider client={client}>
-    <Root />
+    {Root}
   </ApolloProvider>
 ), document.getElementById('root'))
 

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+/* Recipes Comments */
 export const GET_ALL_RECIPES = gql`
   query {
     getAllRecipes {
@@ -11,5 +12,13 @@ export const GET_ALL_RECIPES = gql`
       likes
       createdDate
      }
+  }
+`
+
+export const SIGNUP_USER = gql`
+  mutation($username: String!, $email: String!, $password: String!) {
+    signUpUser(username: $username, email: $email, password: $password) {
+      token
+    }
   }
 `

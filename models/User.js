@@ -13,6 +13,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: [true, 'A user must have an email'],
+    unique: [true, 'This email is already in use'],
   },
   joinDate: {
     type: Date,
