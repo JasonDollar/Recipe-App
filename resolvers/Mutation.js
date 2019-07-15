@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-
+const bcrypt = require('bcryptjs')
 const Recipe = require('../models/Recipe')
 // const User = require('../models/User')
 
@@ -26,6 +26,19 @@ module.exports = {
       const newUser = await User.create({ username, email, password })
       return {
         token: createToken(newUser, process.env.JWT_SECRET, '10days'),
+      }
+    },
+    async signInUser(parent, { username, password }, { User }) {
+      const user = await User.findOne({ username })
+      if (!user) {
+        throw new Error('User not found')
+      }
+      const isValidPassword = await bcrypt.compare(password, user.password)
+      if (!isValidPassword) {
+        throw new Error('Invalid password')
+      }
+      return {
+        token: createToken(user, process.env.JWT_SECRET, '10days'),
       }
     },
   },

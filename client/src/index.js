@@ -12,15 +12,34 @@ import Constants from './constants'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
+  fetchOptions: {
+    credentials: 'include',
+  },
+  request: operation => {
+    const token = localStorage.getItem('token')
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    })
+  },
+  onError: ({ networkError }) => {
+    if (networkError) {
+      console.log('Network Error', networkError)
+    }
+    if (networkError.statusCode === 401) {
+      localStorage.removeItem('token')
+    }
+  },
 })
 
 const Root = (
   <Router>
     <Switch>
-      <Route to={Constants.PATHS.signUp} component={SignUp} />
-      <Route to={Constants.PATHS.signIn} component={SignIn} />
-      <Route to={Constants.PATHS.root} exact component={App} />
-      <Redirect to={Constants.PATHS.root} />
+      <Route path={Constants.PATHS.root} exact component={App} />
+      <Route path={Constants.PATHS.signUp} component={SignUp} />
+      <Route path={Constants.PATHS.signIn} component={SignIn} />
+      <Redirect path={Constants.PATHS.root} />
     </Switch>
   </Router>
 )

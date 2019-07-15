@@ -25,15 +25,14 @@ const SignUp = () => {
     
     clearState()
     const res = await signup()
-    console.log(res.data.signUpUser.token)
     localStorage.setItem('token', res.data.signUpUser.token)
   }
   return (
     <div className="App">
       <h2> Sign Up</h2>
       <Mutation mutation={SIGNUP_USER} variables={{ username, email, password }}>
-        {(signupUser, { data, loading, error }) => (
-          <form className="form" onSubmit={e => handleFormSubmit(e, signupUser)}>
+        {(signUpUser, { data, loading, error }) => (
+          <form className="form" onSubmit={e => handleFormSubmit(e, signUpUser)}>
             <input id="username" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="username" />
             <input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email" />
             <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="password" />

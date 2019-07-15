@@ -38,6 +38,13 @@ const server = new GraphQLServer({
 
 server.express.use(express.json())
 
+
+server.express.use(async (req, res, next) => {
+  const token = req.headers.authorization
+  console.log(token)
+  next()
+})
+
 server.start({ port: process.env.PORT }, options => console.log('Server is running on localhost:' + options.port))
 
 process.on('unhandledRejection', err => {
