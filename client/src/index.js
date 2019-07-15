@@ -8,6 +8,7 @@ import { ApolloProvider } from 'react-apollo'
 import App from './App'
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
+import withSession from './components/withSession'
 import Constants from './constants'
 
 const client = new ApolloClient({
@@ -36,13 +37,14 @@ const client = new ApolloClient({
 const Root = (
   <Router>
     <Switch>
-      <Route path={Constants.PATHS.root} exact component={App} />
+      <Route path={Constants.PATHS.root} exact component={withSession(App)} />
       <Route path={Constants.PATHS.signUp} component={SignUp} />
       <Route path={Constants.PATHS.signIn} component={SignIn} />
-      <Redirect path={Constants.PATHS.root} />
+      <Redirect to={Constants.PATHS.root} />
     </Switch>
   </Router>
 )
+
 
 ReactDOM.render((
   <ApolloProvider client={client}>

@@ -2,8 +2,10 @@ const { GraphQLServer } = require('graphql-yoga')
 const express = require('express')
 require('dotenv').config({ path: './config.env' })
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 const resolvers = require('./resolvers')
 const User = require('./models/User')
+const Recipe = require('./models/Recipe')
 
 process.on('uncaughtException', err => {
   console.log('UNHANDLED EXCEPTION! Shutting down gracefully...')
@@ -32,6 +34,7 @@ const server = new GraphQLServer({
     return {
       request,
       User,
+      Recipe,
     }
   },
 })
@@ -40,8 +43,17 @@ server.express.use(express.json())
 
 
 server.express.use(async (req, res, next) => {
+
   const token = req.headers.authorization
-  console.log(token)
+  if (token) {
+    try {
+      const parseJwtString = token.split(' ')[1]
+      const currentUser = await jwt.verify(parseJwtString, process.env.JWT_SECRET)
+      req.currentUser = currentUser
+    } catch (e) {
+      console.log(e)
+    }
+  }
   next()
 })
 
