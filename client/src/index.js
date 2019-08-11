@@ -38,8 +38,8 @@ const Root = (
   <Router>
     <Switch>
       <Route path={Constants.PATHS.root} exact component={withSession(App)} />
-      <Route path={Constants.PATHS.signUp} component={SignUp} />
-      <Route path={Constants.PATHS.signIn} component={SignIn} />
+      <Route path={Constants.PATHS.signUp} render={withSession(({ refetch, ...rest }) => <SignUp refetch={refetch} {...rest} />)} />
+      <Route path={Constants.PATHS.signIn} render={withSession(({ refetch, ...rest }) => <SignIn refetch={refetch} {...rest} />)} />
       <Redirect to={Constants.PATHS.root} />
     </Switch>
   </Router>

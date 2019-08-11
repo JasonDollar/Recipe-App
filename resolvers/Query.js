@@ -8,9 +8,9 @@ module.exports = {
       return allRecipes
     },
     async getCurrentUser(parent, args, { request, User }) {
-      if (!request.currentUser) return null
+      if (!request.request.currentUser) return null
 
-      const user = await User.findOne({ username: request.currentUser.username })
+      const user = await User.findOne({ username: request.request.currentUser.username })
         .populate({
           path: 'favorites',
           model: 'Recipe',

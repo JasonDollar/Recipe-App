@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Mutation } from 'react-apollo'
-import { SIGNUP_USER } from '../../queries'
+import { withRouter } from 'react-router-dom'
+import { SIGNUP_USER, GET_CURRENT_USER } from '../../queries'
 import Error from '../Error'
 
 
-const SignUp = () => {
+const SignUp = props => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -25,7 +26,9 @@ const SignUp = () => {
     
     clearState()
     const res = await signup()
+    await props.refetch()
     localStorage.setItem('token', res.data.signUpUser.token)
+    props.history.push('/')
   }
   return (
     <div className="App">
