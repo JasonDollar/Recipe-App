@@ -27,7 +27,7 @@ const SignUp = props => {
     clearState()
     const res = await signup()
     await props.refetch()
-    localStorage.setItem('token', res.data.signUpUser.token)
+    localStorage.setItem('tokenR', res.data.signUpUser.token)
     props.history.push('/')
   }
   return (

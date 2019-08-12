@@ -3,6 +3,7 @@ import './App.css'
 import { Query } from 'react-apollo'
 import { GET_ALL_RECIPES } from './queries'
 
+
 function App() {
 
   return ( 

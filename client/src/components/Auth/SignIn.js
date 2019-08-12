@@ -19,7 +19,7 @@ const SignIn = props => {
     
     clearState()
     const res = await signin()
-    localStorage.setItem('token', res.data.signInUser.token)
+    localStorage.setItem('tokenR', res.data.signInUser.token)
     await props.refetch()
     props.history.push('/')
   }

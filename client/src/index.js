@@ -8,6 +8,8 @@ import { ApolloProvider } from 'react-apollo'
 import App from './App'
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
+import Search from './components/Recipe/Search'
+import Navbar from './components/Navbar'
 import withSession from './components/withSession'
 import Constants from './constants'
 
@@ -17,7 +19,7 @@ const client = new ApolloClient({
     credentials: 'include',
   },
   request: operation => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('tokenR')
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : '',
@@ -36,8 +38,10 @@ const client = new ApolloClient({
 
 const Root = (
   <Router>
+    <Navbar />
     <Switch>
       <Route path={Constants.PATHS.root} exact component={withSession(App)} />
+      <Route path={Constants.PATHS.search} component={Search} />
       <Route path={Constants.PATHS.signUp} render={withSession(({ refetch, ...rest }) => <SignUp refetch={refetch} {...rest} />)} />
       <Route path={Constants.PATHS.signIn} render={withSession(({ refetch, ...rest }) => <SignIn refetch={refetch} {...rest} />)} />
       <Redirect to={Constants.PATHS.root} />

@@ -3,5 +3,6 @@ export default {
     root: '/',
     signIn: '/signin',
     signUp: '/signup',
+    search: '/search',
   },
 }
