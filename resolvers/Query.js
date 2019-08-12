@@ -8,9 +8,9 @@ module.exports = {
       return allRecipes
     },
     async getCurrentUser(parent, args, { request, User }) {
-      if (!request.request.currentUser) return null
+      if (!request.currentUser) return null
 
-      const user = await User.findOne({ username: request.request.currentUser.username })
+      const user = await User.findOne({ username: request.currentUser.username })
         .populate({
           path: 'favorites',
           model: 'Recipe',
@@ -21,6 +21,11 @@ module.exports = {
       }
 
       return user
+    },
+    async getRecipe(parent, { id }, { Recipe }, info) {
+      const recipe = await Recipe.findOne({ _id: id })
+      if (!recipe) throw new Error('No recipe found!')
+      return recipe
     },
   },
 }

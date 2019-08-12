@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const Recipe = require('../models/Recipe')
+// const Recipe = require('../models/Recipe')
 // const User = require('../models/User')
 
 const createToken = (user, secret, expiresIn) => {
@@ -12,7 +12,7 @@ module.exports = {
   Mutation: {
     async addRecipe(parent, {
       name, description, category, instructions, username, 
-    }, ctx) {
+    }, { Recipe }) {
       const newRecipe = await Recipe.create({
         name, description, category, instructions, username,
       })

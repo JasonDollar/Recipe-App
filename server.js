@@ -32,7 +32,7 @@ const server = new GraphQLServer({
   resolvers,
   context(request) {
     return {
-      request,
+      ...request,
       User,
       Recipe,
     }

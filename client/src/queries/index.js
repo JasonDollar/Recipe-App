@@ -7,8 +7,22 @@ export const GET_ALL_RECIPES = gql`
       id
       name
       category
-      createdDate
      }
+  }
+`
+
+export const GET_RECIPE = gql`
+  query($id: ID!) {
+    getRecipe(id: $id) {
+      id
+      name
+      category
+      description
+      instructions
+      createdDate
+      name
+      likes
+    }
   }
 `
 

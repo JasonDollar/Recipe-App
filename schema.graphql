@@ -1,6 +1,7 @@
 type Query {
   getAllRecipes: [Recipe]
   getCurrentUser: User
+  getRecipe(id: ID!): Recipe
 }
 
 type Mutation {
@@ -11,6 +12,7 @@ type Mutation {
 
 type Recipe {
   id: ID!
+  """name is used as an username """
   name: String!
   category: String!
   description: String!
