@@ -8,9 +8,9 @@ const withSession = Component => props => (
       data, loading, refetch, 
     }) => {
       if (loading) return <p>loading</p>
-      console.log(data)
+      // console.log(data)
       return (
-        <Component {...props} refetch={refetch} />
+        <Component {...props} refetch={refetch} session={data} />
       )
     }}
   </Query>
