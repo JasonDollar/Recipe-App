@@ -6,10 +6,7 @@ export const GET_ALL_RECIPES = gql`
     getAllRecipes {
       id
       name
-      description
-      instructions
       category
-      likes
       createdDate
      }
   }

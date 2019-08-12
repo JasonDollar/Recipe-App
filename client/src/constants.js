@@ -6,5 +6,6 @@ export default {
     search: '/search',
     profile: '/profile',
     addRecipe: '/recipe/add',
+    recipePage: '/recipe/:id',
   },
 }

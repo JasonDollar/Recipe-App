@@ -10,6 +10,7 @@ import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
 import Search from './components/Recipe/Search'
 import AddRecipe from './components/Recipe/AddRecipe'
+import RecipePage from './components/Recipe/RecipePage'
 import Profile from './components/Profile/Profile'
 import Navbar from './components/Navbar'
 import withSession from './components/withSession'
@@ -47,6 +48,7 @@ const Root = (
       <Route path={Constants.PATHS.root} exact component={withSession(App)} />
       <Route path={Constants.PATHS.search} component={Search} />
       <Route path={Constants.PATHS.addRecipe} component={AddRecipe} />
+      <Route path={Constants.PATHS.recipePage} component={RecipePage} />
       <Route path={Constants.PATHS.profile} component={Profile} />
       <Route path={Constants.PATHS.signUp} render={withSession(({ refetch, ...rest }) => <SignUp refetch={refetch} {...rest} />)} />
       <Route path={Constants.PATHS.signIn} render={withSession(({ refetch, ...rest }) => <SignIn refetch={refetch} {...rest} />)} />

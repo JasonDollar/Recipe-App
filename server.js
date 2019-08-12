@@ -45,7 +45,7 @@ server.express.use(express.json())
 server.express.use(async (req, res, next) => {
   console.log(process.env.JWT_SECRET)
   const token = req.headers.authorization
-  console.log(token)
+  // console.log(token)
   if (token) {
     try {
       const parseJwtString = token.split(' ')[1]
