@@ -38,6 +38,16 @@ export const ADD_RECIPE = gql`
   }
 `
 
+export const SEARCH_RECIPES = gql`
+  query($searchTerm: String) {
+    searchRecipes(searchTerm: $searchTerm) {
+      id
+      name
+      likes
+    }
+  }
+`
+
 export const SIGNUP_USER = gql`
   mutation($username: String!, $email: String!, $password: String!) {
     signUpUser(username: $username, email: $email, password: $password) {

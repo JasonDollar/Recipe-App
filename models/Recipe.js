@@ -30,6 +30,10 @@ const recipeSchema = new Schema({
   },
 })
 
+recipeSchema.index({
+  '$**': 'text',
+})
+
 const Recipe = model('Recipe', recipeSchema)
 
 module.exports = Recipe

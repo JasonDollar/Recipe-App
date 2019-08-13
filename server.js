@@ -43,7 +43,7 @@ server.express.use(express.json())
 
 
 server.express.use(async (req, res, next) => {
-  console.log(process.env.JWT_SECRET)
+  // console.log(process.env.JWT_SECRET)
   const token = req.headers.authorization
   // console.log(token)
   if (token) {
