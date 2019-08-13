@@ -4,7 +4,9 @@ module.exports = {
   Query: {
 
     async getAllRecipes(parent, args, { Recipe }) {
-      const allRecipes = await Recipe.find()
+      const allRecipes = await Recipe.find().sort({
+        createdDate: 'desc',
+      })
       return allRecipes
     },
     async getCurrentUser(parent, args, { request, User }) {

@@ -33,9 +33,9 @@ const client = new ApolloClient({
     if (networkError) {
       console.log('Network Error', networkError)
     }
-    if (networkError.statusCode === 401) {
-      localStorage.removeItem('token')
-    }
+    // if (networkError.statusCode === 401) {
+    //   localStorage.removeItem('token')
+    // }
   },
 })
 
@@ -47,7 +47,7 @@ const Root = (
     <Switch>
       <Route path={Constants.PATHS.root} exact component={withSession(App)} />
       <Route path={Constants.PATHS.search} component={Search} />
-      <Route path={Constants.PATHS.addRecipe} component={AddRecipe} />
+      <Route path={Constants.PATHS.addRecipe} render={withSession(({ session, ...rest }) => <AddRecipe session={session} {...rest} />)} />
       <Route path={Constants.PATHS.recipePage} component={RecipePage} />
       <Route path={Constants.PATHS.profile} component={Profile} />
       <Route path={Constants.PATHS.signUp} render={withSession(({ refetch, ...rest }) => <SignUp refetch={refetch} {...rest} />)} />
