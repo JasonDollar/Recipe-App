@@ -43,5 +43,12 @@ module.exports = {
       return recipes
       
     },
+    async getUserRecipes(parent, { username }, { Recipe }, info) {
+      const userRecipes = await Recipe.find({ username }).sort({
+        createdDate: 'desc',
+      })
+
+      return userRecipes
+    },
   },
 }
