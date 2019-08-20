@@ -49,7 +49,7 @@ const Root = (
       <Route path={Constants.PATHS.search} component={Search} />
       <Route path={Constants.PATHS.addRecipe} render={withSession(({ session, ...rest }) => <AddRecipe session={session} {...rest} />)} />
       <Route path={Constants.PATHS.recipePage} component={RecipePage} />
-      <Route path={Constants.PATHS.profile} component={Profile} />
+      <Route path={Constants.PATHS.profile} render={withSession(({ session, ...rest }) => <Profile session={session} {...rest} />)} />
       <Route path={Constants.PATHS.signUp} render={withSession(({ refetch, ...rest }) => <SignUp refetch={refetch} {...rest} />)} />
       <Route path={Constants.PATHS.signIn} render={withSession(({ refetch, ...rest }) => <SignIn refetch={refetch} {...rest} />)} />
       <Redirect to={Constants.PATHS.root} />
