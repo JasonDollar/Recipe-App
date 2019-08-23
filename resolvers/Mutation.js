@@ -41,5 +41,9 @@ module.exports = {
         token: createToken(user, process.env.JWT_SECRET, '10days'),
       }
     },
+    async deleteUserRecipe(parent, { id }, { Recipe }) {
+      const recipe = await Recipe.findOneAndRemove({ _id: id })
+      return recipe
+    },
   },
 }
