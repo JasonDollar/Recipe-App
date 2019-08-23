@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation } from 'react-apollo'
-import { ADD_RECIPE, GET_ALL_RECIPES } from '../../queries'
+import { ADD_RECIPE, GET_ALL_RECIPES, GET_USER_RECIPES } from '../../queries'
 import Error from '../Error'
 
 const AddRecipe = ({ session, history }) => {
@@ -13,6 +13,7 @@ const AddRecipe = ({ session, history }) => {
     variables: {
       name, category, description, instructions, username: session.getCurrentUser.username,
     },
+    refetchQueries: [{ query: GET_USER_RECIPES, variables: { username: session.getCurrentUser.username } }],
     update: (cache, { data: { addRecipe } }) => {
       console.log(cache)
       const { getAllRecipes } = cache.readQuery({ query: GET_ALL_RECIPES })
